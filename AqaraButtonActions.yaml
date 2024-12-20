@@ -1,7 +1,7 @@
 blueprint:
   name: Aqara Button (Zigbee2MQTT)
   description: >
-    Blueprint for Aqara buttons configured via Zigbee2MQTT. Supports single, double, and long press actions.
+    Blueprint for Aqara buttons configured via Zigbee2MQTT. Supports single, double, and long press actions. ALLO
   domain: automation
   input:
     action_sensor:
