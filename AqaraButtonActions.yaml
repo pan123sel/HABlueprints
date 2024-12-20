@@ -1,0 +1,55 @@
+blueprint:
+  name: Aqara Button (Zigbee2MQTT)
+  description: >
+    Blueprint for Aqara buttons configured via Zigbee2MQTT. Supports single, double, and long press actions.
+  domain: automation
+  input:
+    action_sensor:
+      name: Action Sensor
+      description: Zigbee2MQTT Aqara button action
+      selector:
+        entity:
+          integration: mqtt
+          domain:
+          - sensor
+          multiple: false
+    on_single_press:
+      name: Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    on_double_press:
+      name: Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    on_long_press:
+      name: Long Press
+      description: Action to run on long press
+      default: []
+      selector:
+        action: {}
+
+trigger:
+  - platform: state
+    entity_id: !input action_sensor
+
+condition: []
+
+action:
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.to_state.state == 'single' }}"
+        sequence: !input on_single_press
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.to_state.state == 'double' }}"
+        sequence: !input on_double_press
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.to_state.state == 'long' }}"
+        sequence: !input on_long_press
+    default: []
