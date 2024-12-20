@@ -7,17 +7,14 @@ blueprint:
       name: Aqara Button
       description: Zigbee2MQTT Aqara button to configure
       selector:
-        entity:
+        device:
           integration: mqtt
-          domain: sensor
-          device:
-            manufacturer: LUMI
-            model: 
-              - lumi.remote.b1acn01
-              - lumi.sensor_switch.aq2
-              - lumi.sensor_switch.aq3
-              - lumi.sensor_switch.aq4
-          multiple: false
+          manufacturer: LUMI
+          model: 
+            - lumi.remote.b1acn01
+            - lumi.sensor_switch.aq2
+            - lumi.sensor_switch.aq3
+            - lumi.sensor_switch.aq4
     on_single_press:
       name: Single Press
       description: Action to run on single press
