@@ -5,13 +5,15 @@ blueprint:
   domain: automation
   input:
     action_sensor:
-      name: Action Sensor
-      description: Zigbee2MQTT Aqara button action
+      name: Aqara Button
+      description: Zigbee2MQTT Aqara button to configure
       selector:
         entity:
           integration: mqtt
           domain:
           - sensor
+          device:
+            manufacturer: LUMI
           multiple: false
     on_single_press:
       name: Single Press
