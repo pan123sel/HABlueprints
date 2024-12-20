@@ -14,6 +14,7 @@ blueprint:
           - sensor
           device:
             manufacturer: LUMI
+            model: Wireless mini switch (WXKG11LM)
           multiple: false
     on_single_press:
       name: Single Press
