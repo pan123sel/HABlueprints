@@ -1,7 +1,6 @@
 blueprint:
   name: Aqara Button (Zigbee2MQTT)
-  description: >
-    Blueprint for Aqara buttons configured via Zigbee2MQTT. Supports single, double, and long press actions.
+  description: 'Blueprint for Aqara buttons configured via Zigbee2MQTT. Supports single, double, and long press actions.'
   domain: automation
   input:
     action_sensor:
@@ -10,11 +9,14 @@ blueprint:
       selector:
         entity:
           integration: mqtt
-          domain:
-          - sensor
-#          device:
-#            manufacturer: LUMI
-#            model: Wireless mini switch (WXKG11LM)
+          domain: sensor
+          device:
+            manufacturer: LUMI
+            model: 
+              - lumi.remote.b1acn01
+              - lumi.sensor_switch.aq2
+              - lumi.sensor_switch.aq3
+              - lumi.sensor_switch.aq4
           multiple: false
     on_single_press:
       name: Single Press
@@ -34,25 +36,22 @@ blueprint:
       default: []
       selector:
         action: {}
-
+  source_url: https://raw.githubusercontent.com/pan123sel/HABlueprints/refs/heads/main/AqaraButtonActions.yaml
 trigger:
-  - platform: state
-    entity_id: !input action_sensor
-
+- platform: state
+  entity_id: !input action_sensor
 condition: []
-
 action:
-  - choose:
-      - conditions:
-          - condition: template
-            value_template: "{{ trigger.to_state.state == 'single' }}"
-        sequence: !input on_single_press
-      - conditions:
-          - condition: template
-            value_template: "{{ trigger.to_state.state == 'double' }}"
-        sequence: !input on_double_press
-      - conditions:
-          - condition: template
-            value_template: "{{ trigger.to_state.state == 'long' }}"
-        sequence: !input on_long_press
-    default: []
+- choose:
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.to_state.state == ''single'' }}'
+    sequence: !input on_single_press
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.to_state.state == ''double'' }}'
+    sequence: !input on_double_press
+  - conditions:
+    - condition: template
+      value_template: '{{ trigger.to_state.state == ''long'' }}'
+    sequence: !input on_long_press
