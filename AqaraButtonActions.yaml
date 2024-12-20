@@ -42,13 +42,13 @@ action:
 - choose:
   - conditions:
     - condition: template
-      value_template: '{{ trigger.to_state.state == ''single'' }}'
+      value_template: '{{ trigger.to_state.state == "single" }}'
     sequence: !input on_single_press
   - conditions:
     - condition: template
-      value_template: '{{ trigger.to_state.state == ''double'' }}'
+      value_template: '{{ trigger.to_state.state == "double" }}'
     sequence: !input on_double_press
   - conditions:
     - condition: template
-      value_template: '{{ trigger.to_state.state == ''long'' }}'
+      value_template: '{{ trigger.to_state.state == "long" }}'
     sequence: !input on_long_press
